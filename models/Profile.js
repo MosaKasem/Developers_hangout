@@ -12,7 +12,6 @@ const ProfileSchema = new mongoose.Schema({
   skills: {type: [String], required: true},
   bio: {type: String},
   githubusername: {type: String},
-
   experience: [{
     title: {type: String, required: true},
     company: {type: String, required: true},
@@ -22,7 +21,6 @@ const ProfileSchema = new mongoose.Schema({
     current: {type: Boolean, default: false},
     description: {type: String}
   }],
-
   education:
   [{
     school: {
@@ -52,7 +50,6 @@ const ProfileSchema = new mongoose.Schema({
       type: String
     }
   }],
-
   social: {
     youtube: {type: String},
     twitter: {type: String},
