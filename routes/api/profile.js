@@ -12,7 +12,7 @@ const User = require('../../models/User')
 router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar'])
-    if (!profile) return res.status(400).json({msg: 'No profile for this user'})
+    if (!profile) return res.status(400).json({msg: 'User does not exist'})
 
     res.json(profile)
   } catch (error) {
@@ -66,7 +66,6 @@ router.post('/', [auth, [
       if (facebook) profileFields.social.facebook = facebook
       if (linkedin) profileFields.social.linkedin = linkedin
       if (instagram) profileFields.social.instagram = instagram
-      console.log('profileFields.social: ', profileFields.social)
 
       try {
         let profile = await Profile.findOne({user: req.user.id})
@@ -91,7 +90,83 @@ router.post('/', [auth, [
 
 router.get('/', async (req, res) => {
   try {
+    const profiles = await Profile.find().populate('user', ['name', 'avatar'])
+    res.json(profiles)
+  } catch (error) {
+    console.error(error.message)
+    res.send(500).send('Server error')
+  }
+})
 
+/**
+ * @abstract GET api / profiles / user / :user_id
+ */
+
+router.get('/user/:user_id', async (req, res) => {
+  try {
+    const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar'])
+    if (!profile) return res.status(400).json({msg: 'Profile not found'})
+
+    res.json(profile)
+  } catch (error) {
+    console.error(error.message)
+    if (error.kind === 'ObjectId') return res.status(400).json({msg: 'Profile not found'})
+    res.send(500).send('Server error')
+  }
+})
+
+/**
+ * @abstract DELETE api / profile / user / :user_id
+ */
+router.delete('/', auth, async (req, res) => {
+  try {
+    await Profile.findOneAndRemove({user: req.user.id})
+    await User.findOneAndRemove({_id: req.user.id})
+    res.json({msg: 'User deleted'})
+  } catch (error) {
+    console.error(error.message)
+    res.send(500).send('Server error')
+  }
+})
+
+/**
+ * @abstract PUT api / profile / user / :user_id
+ */
+router.put('/experience', [auth, [
+  check('title', 'Title is required').not().isEmpty(),
+  check('company', 'Company is required').not().isEmpty(),
+  check('from', 'From date is required').not().isEmpty()
+]], async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors) return res.status(400).json({ errors: errors.array() })
+
+  const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      descriptiony
+  } = req.body
+
+  const newExp = {
+    title,
+    company,
+    location,
+    from,
+    to,
+    current,
+    descriptiony
+  }
+
+  try {
+    const profile = await Profile.findOne({user: req.user.id})
+    profile.experience.unshift(newExp)
+
+    await profile.save()
+
+    res.json(profile)
   } catch (error) {
     console.error(error.message)
     res.send(500).send('Server error')
