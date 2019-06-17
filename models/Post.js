@@ -22,4 +22,5 @@ const PostsSchema = new mongoose.Schema({
   date: {type: Date, default: Date.now}
 })
 
-module.exports = Post = mongoose.model('post', PostsSchema)
+const Post = mongoose.model('post', PostsSchema)
+module.exports = Post
