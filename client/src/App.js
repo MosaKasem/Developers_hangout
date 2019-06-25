@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser())
   }, [])
-  return ( 
+  return (
     <Provider store={store}>
       <Router>
         <Fragment>
