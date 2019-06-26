@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { createProfile } from '../../actions/profile'
 import { Link, withRouter } from 'react-router-dom' // eslint-disable-line
 
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -137,14 +137,14 @@ const CreateProfile = ({ createProfile, history }) => {
         </Fragment>}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <Link className='btn btn-light my-1' to='dashboard'>Go Back</Link>
+        <a className='btn btn-light my-1' href='dashboard.html'>Go Back</a>
       </form>
     </Fragment>
   )
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 }
 
-export default connect(null, {createProfile})(withRouter(CreateProfile))
+export default connect(null, {createProfile})(withRouter(EditProfile))

@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { setAlert } from './alert'
 import {
     GET_PROFILE,
     PROFILE_ERROR
@@ -10,6 +9,7 @@ import {setAlert} from './alert'
 export const getCurrentProfile = () => async dispatch => {
   try {
     const res = await axios.get('/api/profile/me')
+
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -24,13 +24,12 @@ export const getCurrentProfile = () => async dispatch => {
 
 // Create or update a profile
 export const createProfile = (formData, history, edit = false) => async dispatch => {
-  try {
-    const config = {
-      headers: {
-        'ContentType': 'application/json'
-      }
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
     }
-
+  }
+  try {
     const res = await axios.post('/api/profile', formData, config)
 
     dispatch({
@@ -42,7 +41,8 @@ export const createProfile = (formData, history, edit = false) => async dispatch
       history.push('/dashboard')
     }
   } catch (error) {
-    const errors = error.response.data.errors
+    const errors = error.response.data.msg
+
     if (errors) {
       errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
     }
