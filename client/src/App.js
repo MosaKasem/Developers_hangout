@@ -17,7 +17,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 // Redux/>
 
-if (localStorage.token) setAuthToken(localStorage.token)
+if (localStorage.token) setAuthToken(localStorage.token) // eslint-disable-line
 
 const App = () => {
   useEffect(() => {

@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getCurrentProfile } from '../../actions/profile'
 import Spinner from '../layout/Spinner'
+import DashboardActions from './DashboardActions'
 
 const DashBoard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
   useEffect(() => {
     getCurrentProfile()
-  }, [])
+  }, []) // eslint-disable-line
 
   return (
     loading && profile === null ? <Spinner /> : <Fragment>
@@ -16,7 +17,7 @@ const DashBoard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
       <p className='lead'>
         <i className='fas fa-user' /> Welcome { user && user.name } </p>
       { profile !== null ? (
-        <Fragment>has</Fragment>
+        <Fragment><DashboardActions /></Fragment>
       ) : (
         <Fragment>
           <p>Current user does not have a profile setup</p>

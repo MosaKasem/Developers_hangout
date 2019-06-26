@@ -13,7 +13,7 @@ import {
 } from './types'
 
 export const loadUser = () => async dispatch => {
-  if (localStorage.token) setAuthToken(localStorage.token)
+  if (localStorage.token) setAuthToken(localStorage.token) // eslint-disable-line
   try {
     const res = await axios.get('/api/auth')
     dispatch({
