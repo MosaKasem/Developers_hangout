@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { getCurrentProfile } from '../../actions/profile'
 import Spinner from '../layout/Spinner'
 import DashboardActions from './DashboardActions'
+import Experience from './Experience'
 
 const DashBoard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
   useEffect(() => {
@@ -17,7 +18,10 @@ const DashBoard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
       <p className='lead'>
         <i className='fas fa-user' /> Welcome { user && user.name } </p>
       { profile !== null ? (
-        <Fragment><DashboardActions /></Fragment>
+        <Fragment>
+          <DashboardActions />
+          <Experience experience={profile.experience} />
+        </Fragment>
       ) : (
         <Fragment>
           <p>Current user does not have a profile setup</p>
