@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { createProfile } from '../../actions/profile'
+import { createProfile, getCurrentProfile } from '../../actions/profile'
 import { Link, withRouter } from 'react-router-dom' // eslint-disable-line
 
-const EditProfile = ({ createProfile, history }) => {
+const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -21,6 +21,29 @@ const EditProfile = ({ createProfile, history }) => {
   })
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false)
+
+  useEffect(() => {
+    getCurrentProfile()
+
+    /**
+     * If company && others is "loading" or is otherwise "empty" then send empty strings
+     * Otherwise send the content
+     */
+    setFormData({
+      company: loading || !profile.company ? '' : profile.company,
+      website: loading || !profile.website ? '' : profile.website,
+      location: loading || !profile.location ? '' : profile.location,
+      status: loading || !profile.status ? '' : profile.status,
+      skills: loading || !profile.skills ? '' : profile.skills.join(','),
+      githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
+      bio: loading || !profile.bio ? '' : profile.bio,
+      twitter: loading || !profile.social ? '' : profile.social.twitter,
+      facebook: loading || !profile.social ? '' : profile.social.facebook,
+      linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+      youtube: loading || !profile.social ? '' : profile.social.youtube,
+      instagram: loading || !profile.social ? '' : profile.social.instagram
+    })
+  }, [loading]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const {
     company,
@@ -41,7 +64,7 @@ const EditProfile = ({ createProfile, history }) => {
 
   const onSubmit = e => {
     e.preventDefault()
-    createProfile(formData, history)
+    createProfile(formData, history, true)
   }
 
   return (
@@ -137,14 +160,21 @@ const EditProfile = ({ createProfile, history }) => {
         </Fragment>}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <a className='btn btn-light my-1' href='dashboard.html'>Go Back</a>
+        <Link className='btn btn-light my-1' to='dashboard'>Go Back</Link>
       </form>
     </Fragment>
   )
 }
 
 EditProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 }
+/* eslint-disable */
+const mapStateToProps = state => ({
+  profile: state.profile
+})
+/* eslint-enable */
 
-export default connect(null, {createProfile})(withRouter(EditProfile))
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile))

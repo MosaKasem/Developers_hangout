@@ -141,7 +141,7 @@ router.put('/experience', [auth, [
   check('from', 'From date is required').not().isEmpty()
 ]], async (req, res) => {
   const errors = validationResult(req)
-  if (!errors) return res.status(400).json({ errors: errors.array() })
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
 
   const {
       title,
@@ -215,7 +215,7 @@ router.put('/education', [auth, [
   check('from', 'From date is required').not().isEmpty()
 ]], async (req, res) => {
   const errors = validationResult(req)
-  if (!errors) return res.status(400).json({ errors: errors.array() })
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
 
   const {
         school,
@@ -245,6 +245,14 @@ router.put('/education', [auth, [
 
     res.json(profile)
   } catch (error) {
+    // This is last resort :: Handle errors if validator fails
+/*     if (error.name === 'ValidationError') {
+      return res.send(500).send('Server error')
+    }
+    console.log('-------------------------------error-------------------------------')
+    // console.log('error: ', error)
+    console.log('-------------------------------error-------------------------------')
+     */
     console.error(error.message)
     res.send(500).send('Server error')
   }
