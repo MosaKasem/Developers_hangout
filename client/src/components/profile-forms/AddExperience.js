@@ -44,10 +44,10 @@ const AddExperience = ({ addExperience, history }) => {
         addExperience(formData, history)
       }}>
         <div className='form-group'>
-          <input type='text' placeholder='* Job Title' name='title' value={title} onChange={e => onChange(e)} required />
+          <input type='text' placeholder='* Job Title' name='title' value={title} onChange={e => onChange(e)} />
         </div>
         <div className='form-group'>
-          <input type='text' placeholder='* Company' name='company' value={company} onChange={e => onChange(e)} required />
+          <input type='text' placeholder='* Company' name='company' value={company} onChange={e => onChange(e)} />
         </div>
         <div className='form-group'>
           <input type='text' placeholder='Location' name='location' value={location} onChange={e => onChange(e)} />
@@ -62,7 +62,7 @@ const AddExperience = ({ addExperience, history }) => {
               ...formData, current: !current
             })
             toggleDisabled(!toDateDIsabled)
-          }} /> {' '}Current Job</p>
+          }} /> {' '}Current School</p>
         </div>
         <div className='form-group'>
           <h4>To Date</h4>
