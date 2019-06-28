@@ -7,6 +7,7 @@ import Spinner from '../layout/Spinner'
 import DashboardActions from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
+import ConfirmButton from '../layout/ConfirmButton'
 
 const DashBoard = ({
   getCurrentProfile,
@@ -30,9 +31,13 @@ const DashBoard = ({
           <Education education={profile.education} />
 
           <div className='my-2'>
-            <button className='btn btn-danger' onClick={() => deleteAccount()} >
-              <i className='fas fa-user-minus'>Delete My Account</i>
-            </button>
+            <ConfirmButton
+              dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
+              action={() => deleteAccount()}
+      />
+            {/* <button className='btn btn-danger' onClick={(e) => onClick(e)}>
+              <i>Delete My Account</i>
+            </button> */}
           </div>
 
         </Fragment>
@@ -51,9 +56,9 @@ const DashBoard = ({
 
 DashBoard.prototype = {
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  deleteAccount: PropTypes.func.isRequired
+  profile: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

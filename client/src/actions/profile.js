@@ -151,19 +151,17 @@ export const deleteEducation = id => async dispatch => {
 
 // Delete Account&Profile
 export const deleteAccount = () => async dispatch => {
-  if (window.confirm('Are you sure? This will delete your account permanantly!')) {
-    try {
-      const res = await axios.delete(`/api/profile/`)
-      console.log('res: ', res)
-      dispatch({type: CLEAR_PROFILE})
-      dispatch({type: ACCOUNT_DELETED})
-      dispatch(setAlert('Account has been deleted!'))
-    } catch (error) {
-      console.log('error: ', error.response)
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: { msg: error.response.statusText, status: error.response.status }
-      })
-    }
+  try {
+    const res = await axios.delete(`/api/profile/`)
+
+    dispatch({type: CLEAR_PROFILE})
+    dispatch({type: ACCOUNT_DELETED})
+    dispatch(setAlert('Account has been deleted!'))
+  } catch (error) {
+    console.log('error: ', error.response)
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    })
   }
 }
