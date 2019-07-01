@@ -3,11 +3,15 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../actions/auth'
-import DashBoard from '../dashboard/Dashboard'
+// import DashBoard from '../dashboard/Dashboard'
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
+      <li><Link to='/profiles'>
+        <li className='fas fa-users' /> {' '}
+        <span className='hide-sm'>Developers</span></Link>
+      </li>
       <li><Link to='/dashboard'>
         <li className='fas fa-user' /> {' '}
         <span className='hide-sm'>DashBoard</span></Link>
@@ -23,7 +27,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   )
   const guestLinks = (
     <ul>
-      <li><Link to='#!profiles'>Developers</Link></li>
+      <li><Link to='/profiles'>Developers</Link></li>
       <li><Link to='/register'>Register</Link></li>
       <li><Link to='/login'>Login</Link></li>
     </ul>

@@ -27,7 +27,7 @@ export const getCurrentProfile = () => async dispatch => {
   }
 }
 
-// Get current profiles (users)
+// Get profiles (users)
 export const getProfiles = () => async dispatch => {
   dispatch({ type: CLEAR_PROFILE })
   try {
