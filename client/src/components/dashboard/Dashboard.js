@@ -32,12 +32,9 @@ const DashBoard = ({
 
           <div className='my-2'>
             <ConfirmButton
-              dialog={['Delete', 'Are You Sure?', 'Once more to delete']}
-              action={() => deleteAccount()}
-      />
-            {/* <button className='btn btn-danger' onClick={(e) => onClick(e)}>
-              <i>Delete My Account</i>
-            </button> */}
+              dialog={['Delete User', 'Are You Sure?', 'This Cannot be undone!']}
+              action={() => console.log('try')} // swap console.log(try) with deleteAccount() when you're done
+            />
           </div>
 
         </Fragment>
