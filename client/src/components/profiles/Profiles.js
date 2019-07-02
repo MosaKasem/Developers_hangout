@@ -8,14 +8,15 @@ import { getProfiles } from '../../actions/profile'
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles()
-  }, [])
+  }, []) // eslint-disable-line
+
   return <Fragment>
     {
       loading ? <Spinner />
       : <Fragment>
         <h1 className='large text-primary'>Developers</h1>
         <p className='lead'>
-          <i className='fab fa-connectdevelop' /> Developers hangout
+          <i className='fab fa-connectdevelop' /> Developers center
         </p>
         <div className='profiles'>
           { profiles.length > 0 ? (
