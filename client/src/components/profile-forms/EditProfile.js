@@ -43,7 +43,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
       youtube: loading || !profile.social ? '' : profile.social.youtube,
       instagram: loading || !profile.social ? '' : profile.social.instagram
     })
-  }, [loading]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [loading, getCurrentProfile])
 
   const {
     company,
@@ -172,9 +172,9 @@ EditProfile.propTypes = {
   profile: PropTypes.object.isRequired
 }
 /* eslint-disable */
+/* eslint-enable */
 const mapStateToProps = state => ({
   profile: state.profile
 })
-/* eslint-enable */
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile))

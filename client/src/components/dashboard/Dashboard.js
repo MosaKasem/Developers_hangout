@@ -17,7 +17,7 @@ const DashBoard = ({
 }) => {
   useEffect(() => {
     getCurrentProfile()
-  }, []) // eslint-disable-line
+  }, [getCurrentProfile])
 
   return (
     loading && profile === null ? <Spinner /> : <Fragment>
