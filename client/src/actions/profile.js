@@ -46,7 +46,7 @@ export const getProfiles = () => async dispatch => {
 }
 // Get githubrepos (usersName)
 export const getGitHubRepo = (username) => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE })
+  // dispatch({ type: CLEAR_PROFILE })
   try {
     const res = await axios.get(`/api/profile/github/${username}`)
 
@@ -127,7 +127,6 @@ export const addExperience = (formData, history) => async dispatch => {
     dispatch(setAlert('Experience Added', 'success'))
     history.push('/dashboard')
   } catch (error) {
-    console.log('error: ', error)
     const errors = error.response.data.errors
 
     if (errors) {
@@ -212,7 +211,6 @@ export const deleteAccount = () => async dispatch => {
     dispatch({type: ACCOUNT_DELETED})
     dispatch(setAlert('Account has been deleted!'))
   } catch (error) {
-    console.log('error: ', error.response)
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: error.response.statusText, status: error.response.status }

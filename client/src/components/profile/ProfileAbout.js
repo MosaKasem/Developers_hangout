@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import profile from '../../reducers/profile'
 
 const ProfileAbout = ({ profile: { bio, skills, user: { name } } }) =>
   <div className='profile-about bg-light p-2'>

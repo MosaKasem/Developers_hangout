@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const ProfileTop = ({ profile: {status, company, location, website, social, user: { name, avatar } }}) => {
+const ProfileTop = ({ profile: { status, company, location, website, social, user: { name, avatar } } }) => {
   return (
     <div className='profile-top bg-primary p-2'>
       <img

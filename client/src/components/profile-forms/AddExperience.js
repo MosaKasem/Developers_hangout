@@ -62,7 +62,7 @@ const AddExperience = ({ addExperience, history }) => {
               ...formData, current: !current
             })
             toggleDisabled(!toDateDIsabled)
-          }} /> {' '}Current School</p>
+          }} /> {' '}Current Job</p>
         </div>
         <div className='form-group'>
           <h4>To Date</h4>
