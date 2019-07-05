@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../actions/auth'
-// import DashBoard from '../dashboard/Dashboard'
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
@@ -11,6 +10,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <li><Link to='/profiles'>
         <li className='fas fa-users' /> {' '}
         <span className='hide-sm'>Developers</span></Link>
+      </li>
+      <li><Link to='/posts'>
+        <li className='fas fa-users' /> {' '}
+        <span className='hide-sm'>Posts</span></Link>
       </li>
       <li><Link to='/dashboard'>
         <li className='fas fa-user' /> {' '}
