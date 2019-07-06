@@ -27,7 +27,6 @@ export const addLike = id => async dispatch => {
       payload: { id, likes: res.data }
     })
   } catch (error) {
-    console.log('Update Like error: ', error)
     dispatch({
       type: POST_ERROR,
       payload: { msg: error.response.statusText, status: error.response.status }
@@ -45,7 +44,6 @@ export const removeLike = id => async dispatch => {
       payload: { id, likes: res.data }
     })
   } catch (error) {
-    console.log('Remove Like error: ', error)
     dispatch({
       type: POST_ERROR,
       payload: { msg: error.response.statusText, status: error.response.status }
