@@ -41,14 +41,14 @@ function PostItem ({ addLike, removeLike, deletePost, auth, post: { _id, text, n
               <span className='comment-count'>{comments.length}</span>
               )}
             </Link>
-            {!auth.loading && user === auth.user._id && (
+            {/* {!auth.loading && user === auth.user._id && ( */}
             <button
               onClick={e => deletePost(_id)}
               type='button'
               className='btn btn-danger'>
               <i className='fas fa-times' />
             </button>
-            )}
+            {/* )} */}
           </div>
         </div>
       </div>
