@@ -1,6 +1,7 @@
 import {
     GET_POST,
-    POST_ERROR
+    POST_ERROR,
+    UPDATE_LIKES
 } from '../actions/types'
 
 const initialState = {
@@ -24,6 +25,19 @@ export default function (state = initialState, action) {
         ...state,
         error: payload,
         loading: false
+      }
+    case UPDATE_LIKES:
+      return {
+        ...state,
+        posts: state.posts.map(post => {
+          if (post._id === payload.id) { // if it's a match, update the post likes
+            return {
+              ...post, likes: payload.likes
+            }
+          } else { // else do nothing, just return the post
+            return post
+          }
+        })
       }
     default:
       return state
