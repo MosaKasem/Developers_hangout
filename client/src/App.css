@@ -492,6 +492,17 @@ button {
   margin-bottom: 0.5rem;
 }
 
+.custom-counter {
+  font-weight: 400;
+  font-size: 31px;
+  text-align: center;
+  background: #c4302b;
+}
+
+.green {
+  background: var(--primary-color);
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {

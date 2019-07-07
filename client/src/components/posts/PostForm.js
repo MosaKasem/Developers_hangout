@@ -7,6 +7,7 @@ const PostForm = ({ addPost }) => {
   const [formData, setFormData] = useState({
     text: ''
   })
+  let green = ''
 
   const {
       text
@@ -16,17 +17,31 @@ const PostForm = ({ addPost }) => {
     ...formData, [e.target.name]: e.target.value
   })
 
+  if (text && text.length >= 200) {
+    green = 'green'
+  }
+
   return (
     <div className='post-form'>
       <div className='bg-primary p'>
         <h3>Share your post, thoughts, question or idea..</h3>
       </div>
+      <p className={`custom-counter ${green}`} >{text.length} characters {' '}
+        {green ? (
+          <i className='fas fa-comments' />
+      ) : (
+        <i className='fas fa-comment-slash' />
+      )}
+      </p>
+
       <form
         className='form my-1'
         onSubmit={e => {
           e.preventDefault()
           addPost({text})
-          setFormData('')
+          setFormData({
+            text: ''
+          })
         }}
         >
         <textarea
@@ -37,7 +52,6 @@ const PostForm = ({ addPost }) => {
           value={text}
           onChange={e => onChange(e)}
        />
-        {/* <p value={text.length}>B</p> */}
         <input type='submit' className='btn btn-dark my-1' value='Submit' />
       </form>
     </div>
