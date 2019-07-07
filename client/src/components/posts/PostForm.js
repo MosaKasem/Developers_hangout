@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { addPost } from '../../actions/post'
 
 const PostForm = ({ addPost }) => {
-  console.log('addPost: ', addPost)
   const [text, setText] = useState('')
 
   return (
@@ -15,7 +14,6 @@ const PostForm = ({ addPost }) => {
       <form
         className='form my-1'
         onSubmit={e => {
-          console.log(addPost)
           e.preventDefault()
           addPost({text})
           setText('')

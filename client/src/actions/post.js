@@ -78,14 +78,19 @@ export const addPost = formData => async dispatch => {
   }
   try {
     const res = await axios.post('/api/posts/', formData, config)
-    console.log('res: ', res)
     dispatch({
       type: ADD_POST,
       payload: res.data
     })
+    if (formData.text.length < 200) {
+      console.log('formData.text.length: ', formData.text.length)
+      dispatch({
+        type: POST_ERROR,
+        payload: {msg: 'Blabla', status: 400}
+      })
+    }
     dispatch(setAlert('Post Created', 'success'))
   } catch (error) {
-    console.log('error: ', error)
     dispatch({
       type: POST_ERROR,
       payload: { msg: error.response.statusText, status: error.response.status }
