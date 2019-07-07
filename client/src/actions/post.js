@@ -77,19 +77,23 @@ export const addPost = formData => async dispatch => {
     }
   }
   try {
-    const res = await axios.post('/api/posts/', formData, config)
-    dispatch({
-      type: ADD_POST,
-      payload: res.data
-    })
     if (formData.text.length < 200) {
-      console.log('formData.text.length: ', formData.text.length)
       dispatch({
         type: POST_ERROR,
-        payload: {msg: 'Blabla', status: 400}
+        payload: {
+          msg: 'Minimum 200 characters required for a post',
+          status: '400'
+        }
       })
+      dispatch(setAlert('Minimum 200 characters required for a post', 'fail'))
+    } else {
+      const res = await axios.post('/api/posts/', formData, config)
+      dispatch({
+        type: ADD_POST,
+        payload: res.data
+      })
+      dispatch(setAlert('Post Created', 'success'))
     }
-    dispatch(setAlert('Post Created', 'success'))
   } catch (error) {
     dispatch({
       type: POST_ERROR,
