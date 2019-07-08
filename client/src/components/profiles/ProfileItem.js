@@ -11,7 +11,7 @@ const ProfileItem = ({
         skills
     } }) => {
   return (
-    <div className='profile bg-light'>
+    <div className='profile bg-dark'>
       <img className='round-img' src={avatar} alt='' />
       <div>
         <h2>{name}</h2>
