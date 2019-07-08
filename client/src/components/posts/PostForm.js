@@ -39,16 +39,18 @@ const PostForm = ({ addPost }) => {
         onSubmit={e => {
           e.preventDefault()
           addPost({text})
-          setFormData({
-            text: ''
-          })
+          if (text.length >= 200) {
+            setFormData({
+              text: ''
+            })
+          }
         }}
         >
         <textarea
           name='text'
           cols='30'
           rows='5'
-          placeholder='Create a post'
+          placeholder='200 characters atleast to create a post!'
           value={text}
           onChange={e => onChange(e)}
        />
