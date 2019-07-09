@@ -135,7 +135,7 @@ router.post('/comment/:id', [auth, [
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) return res.status(400).json({errors: errors.array()})
-
+    console.log(!errors.isEmpty())
     try {
       const user = await User.findById(req.user.id).select('-password')
       const post = await Post.findById(req.params.id)
