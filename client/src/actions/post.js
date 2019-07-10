@@ -122,8 +122,6 @@ export const addPost = formData => async dispatch => {
 /** @Comments_Related */
 
 export const addComment = (postID, formData) => async dispatch => {
-  console.log('formData: ', formData)
-  console.log('postID: ', postID)
   const config = {
     headers: {
       'Content-Type': 'application/json'

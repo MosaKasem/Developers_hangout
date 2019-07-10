@@ -66,8 +66,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         post: { ...state.post, comments: payload },
-        loading: false,
-        console: console.log(state, payload)
+        loading: false
       }
     case REMOVE_COMMENT:
       return {
